@@ -10,11 +10,16 @@ pipeline {
             }
         }
 
+        
+
         stage('Test HTML Form') {
             steps {
-                bat 'python -m unittest discover -s tests -v'
+                bat '"C:\\Users\\Naman Srivastava\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe" --version'
+                bat '"C:\\Users\\Naman Srivastava\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe" -m unittest discover -s tests -p "test*.py" -v'
             }
         }
+
+
     }
 
     post {
