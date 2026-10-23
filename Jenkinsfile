@@ -1,7 +1,10 @@
 
-
 pipeline {
     agent any
+
+    options {
+        skipDefaultCheckout(true)
+    }
 
     stages {
         stage('Checkout') {
@@ -10,25 +13,30 @@ pipeline {
             }
         }
 
-        
-
-        stage('Test HTML Form') {
+        stage('Check Python') {
             steps {
-                bat '"C:\\Users\\Naman Srivastava\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe" --version'
-                bat '"C:\\Users\\Naman Srivastava\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe" -m unittest discover -s tests -p "test*.py" -v'
+                bat '"C:\\Users\\Naman Srivastava\\AppData\\Local\\Programs\\Python\\Python315\\python.exe" --version'
             }
         }
 
-
+        stage('Test HTML Form') {
+            steps {
+                bat '"C:\\Users\\Naman Srivastava\\AppData\\Local\\Programs\\Python\\Python315\\python.exe" -m unittest discover -s tests -p "test*.py" -v'
+            }
+        }
     }
 
     post {
         success {
-            echo 'HTML Form Tests Passed!'
+            echo 'SUCCESS: All HTML Form Tests Passed!'
         }
+
         failure {
-            echo 'HTML Form Tests Failed!'
+            echo 'FAILURE: HTML Form Pipeline Failed!'
+        }
+
+        always {
+            echo 'HTML Form Pipeline Execution Completed.'
         }
     }
 }
-
