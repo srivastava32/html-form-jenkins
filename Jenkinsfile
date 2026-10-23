@@ -1,4 +1,5 @@
 
+
 pipeline {
     agent any
 
@@ -11,8 +12,18 @@ pipeline {
 
         stage('Test HTML Form') {
             steps {
-                sh 'python3 -m unittest discover -s tests -v'
+                bat 'python -m unittest discover -s tests -v'
             }
         }
     }
+
+    post {
+        success {
+            echo 'HTML Form Tests Passed!'
+        }
+        failure {
+            echo 'HTML Form Tests Failed!'
+        }
+    }
 }
+
